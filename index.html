@@ -35,7 +35,7 @@
             overflow-x: hidden;
         }
 
-        /* SPLASH SCREEN - Dark Mode */
+        /* SPLASH SCREEN - Dark Mode avec Image */
         .splash-screen {
             position: fixed;
             top: 0;
@@ -48,7 +48,7 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            animation: fadeOutSplash 0.6s ease 2.2s forwards;
+            animation: fadeOutSplash 0.6s ease 2.5s forwards;
         }
 
         @keyframes fadeOutSplash {
@@ -58,24 +58,54 @@
             }
         }
 
+        .splash-logo-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .splash-logo-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--red-primary);
+            box-shadow: 0 0 40px var(--red-glow), 0 0 80px var(--red-glow);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 40px var(--red-glow), 0 0 80px var(--red-glow);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 60px var(--red-glow), 0 0 120px var(--red-glow), 0 0 160px rgba(255, 0, 0, 0.2);
+            }
+        }
+
         .splash-brand {
             text-align: center;
-            animation: glitchIn 1s ease-out;
+            animation: slideUpFade 0.8s ease-out 0.3s backwards;
         }
 
-        @keyframes glitchIn {
-            0%, 100% { opacity: 1; transform: translateY(0); }
-            20% { opacity: 0.8; transform: translateY(-5px) translateX(-2px); }
-            40% { opacity: 1; transform: translateY(0) translateX(2px); }
-            60% { opacity: 0.9; transform: translateY(3px); }
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .splash-logo {
+        .splash-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             letter-spacing: 2px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             background: linear-gradient(135deg, var(--red-primary) 0%, #FF4444 100%);
             -webkit-background-clip: text;
@@ -84,15 +114,8 @@
         }
 
         .splash-flag {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: wave 1.5s ease-in-out infinite;
-        }
-
-        @keyframes wave {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
+            font-size: 32px;
+            margin-bottom: 10px;
         }
 
         .splash-tagline {
@@ -103,10 +126,24 @@
             font-weight: 700;
         }
 
+        .splash-loader {
+            margin-top: 24px;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 0, 0, 0.2);
+            border-top-color: var(--red-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* APP CONTAINER */
         .app-container {
             opacity: 0;
-            animation: fadeInApp 0.6s ease 2.5s forwards;
+            animation: fadeInApp 0.6s ease 2.8s forwards;
         }
 
         @keyframes fadeInApp {
@@ -866,11 +903,15 @@
 <body>
     <!-- SPLASH -->
     <div class="splash-screen">
+        <div class="splash-logo-container">
+            <img src="https://i.ibb.co/9mdSF9Tx/tg-image-2242270494.jpg" alt="Logo" class="splash-logo-image">
+        </div>
         <div class="splash-brand">
             <div class="splash-flag">🇨🇳</div>
-            <div class="splash-logo">TON FOURNISSEUR</div>
+            <div class="splash-title">TON FOURNISSEUR</div>
             <div class="splash-tagline">Sourcing Premium</div>
         </div>
+        <div class="splash-loader"></div>
     </div>
 
     <!-- CLIENT VIEW -->
